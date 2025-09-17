@@ -1,0 +1,9 @@
+package com.springData.learn_spring.data.jpa.repository;
+
+import com.springData.learn_spring.data.jpa.entity.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
+}
