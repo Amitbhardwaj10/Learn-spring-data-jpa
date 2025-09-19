@@ -1,11 +1,12 @@
 package com.springData.learn_spring.data.jpa.repository;
 
 import com.springData.learn_spring.data.jpa.entity.Student;
-import org.hibernate.annotations.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(value = "SELECT * FROM tbl_student s where s.email_address = :emailId", nativeQuery = true)
     public Student getStudentByEmailAddressNativeNamedParam(@Param("emailId") String emailId);
 
-
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tbl_student SET first_name = ?1 WHERE email_address = ?2", nativeQuery = true)
+    public int updateStudentNameByEmailId(String firstName, String emailId);
 }
